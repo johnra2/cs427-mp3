@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: BlackBox.SortAlgorithmBlackBoxTest
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.013 s <<< FAILURE! - in BlackBox.SortAlgorithmBlackBoxTest
-longTest(BlackBox.SortAlgorithmBlackBoxTest)  Time elapsed: 0.007 s  <<< ERROR!
-java.lang.OutOfMemoryError: Requested array size exceeds VM limit
-	at BlackBox.SortAlgorithmBlackBoxTest.longTest(SortAlgorithmBlackBoxTest.java:28)
-
