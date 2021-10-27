@@ -44,7 +44,7 @@ public class LruCacheBlackBoxTest extends LruCacheSetup {
     }
 
     @Test(expected = NullPointerException.class)
-    public void noSizeTest(){
+    public void noSizePut(){
         //constructor size = 2
         int[] constructParameters = new int[]{0};
         lruCachePUT.run(LruCacheMethod.Constructor,
@@ -55,6 +55,15 @@ public class LruCacheBlackBoxTest extends LruCacheSetup {
         int[] functionParameters2 = new int[]{1,2};
         lruCachePUT.run(LruCacheMethod.Put,
                 functionParameters2,
+                null);
+    }
+
+    @Test()
+    public void noSizeGet(){
+        //constructor size = 2
+        int[] constructParameters = new int[]{0};
+        lruCachePUT.run(LruCacheMethod.Constructor,
+                constructParameters,
                 null);
         
         //get key = 1
