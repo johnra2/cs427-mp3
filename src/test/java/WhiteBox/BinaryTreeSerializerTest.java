@@ -10,23 +10,27 @@ import static org.junit.Assert.assertEquals;
 public class BinaryTreeSerializerTest {
 
     @Test
-    public void serializeTest(){
-        //@TODO: Delete/modify me
+    public void basicTest() {
         BinaryTreeSerializer bs = new BinaryTreeSerializerImpl();
         TreeNode root = null;
         String ret = bs.serialize(root);
-        assertEquals("[null]",ret);
+        assertEquals("[null]", ret);
+        String s = "[null]";
+        TreeNode rootret = bs.deserialize(s);
+        assertEquals(null, rootret);
     }
 
     @Test
-    public void deserializeTest2(){
-        //@TODO: Delete/modify me
+    public void level2Test() {
         BinaryTreeSerializer bs = new BinaryTreeSerializerImpl();
-        String s = "[null]";
-        TreeNode root = null;
+        TreeNode root = new TreeNode(0);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(2);
+        String ret = bs.serialize(root);
+        assertEquals("[0,1,2,null,null,null,null]", ret);
+        String s = "[0,1,2,null,null,null,null]";
         TreeNode rootret = bs.deserialize(s);
-        assertEquals(root,rootret);
+        assertEquals(root, rootret);
     }
 
-    //@TODO: Create more tests
 }
