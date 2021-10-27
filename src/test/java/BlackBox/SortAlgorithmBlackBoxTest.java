@@ -27,7 +27,7 @@ public class SortAlgorithmBlackBoxTest extends SortSetup {
 
     @Test
     public void longTest() {
-        int length = 1000000;
+        int length = 10000;
         int[] input = new int[length];
         int[] expectedOutput = new int[length];
         for (int i = 0; i < length; i++) {
