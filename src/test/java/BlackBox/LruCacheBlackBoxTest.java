@@ -31,7 +31,7 @@ public class LruCacheBlackBoxTest extends LruCacheSetup {
     @Test()
     public void noInputTest(){
         //constructor size = 2
-        int[] constructParameters = new int[1];
+        int[] constructParameters = new int[]{1};
         lruCachePUT.run(LruCacheMethod.Constructor,
                 constructParameters,
                 null);
@@ -43,13 +43,67 @@ public class LruCacheBlackBoxTest extends LruCacheSetup {
                 -1);
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = NullPointerException.class)
     public void noSizeTest(){
         //constructor size = 2
-        int[] constructParameters = new int[0];
+        int[] constructParameters = new int[]{0};
         lruCachePUT.run(LruCacheMethod.Constructor,
                 constructParameters,
                 null);
+
+        //put key=1, value = 2
+        int[] functionParameters2 = new int[]{1,2};
+        lruCachePUT.run(LruCacheMethod.Put,
+                functionParameters2,
+                null);
+        
+        //get key = 1
+        int[] getParameters = new int[]{0};
+        lruCachePUT.run(LruCacheMethod.Get,
+                getParameters,
+                -1);
+    }
+
+    @Test()
+    public void negativeSizeTest(){
+        //constructor size = 2
+        int[] constructParameters = new int[]{-1};
+        lruCachePUT.run(LruCacheMethod.Constructor,
+                constructParameters,
+                null);
+
+        //put key=1, value = 2
+        int[] functionParameters2 = new int[]{1,2};
+        lruCachePUT.run(LruCacheMethod.Put,
+                functionParameters2,
+                null);
+        
+        //get key = 1
+        int[] getParameters = new int[]{1};
+        lruCachePUT.run(LruCacheMethod.Get,
+                getParameters,
+                2);
+    }
+
+    @Test()
+    public void negativeKeyTest(){
+        //constructor size = 2
+        int[] constructParameters = new int[]{2};
+        lruCachePUT.run(LruCacheMethod.Constructor,
+                constructParameters,
+                null);
+
+        //put key=1, value = 2
+        int[] functionParameters2 = new int[]{-1,2};
+        lruCachePUT.run(LruCacheMethod.Put,
+                functionParameters2,
+                null);
+        
+        //get key = 1
+        int[] getParameters = new int[]{-1};
+        lruCachePUT.run(LruCacheMethod.Get,
+                getParameters,
+                2);
     }
 
     @Test
@@ -115,6 +169,33 @@ public class LruCacheBlackBoxTest extends LruCacheSetup {
                 lruCachePUT.run(LruCacheMethod.Get,
                         getPrev,
                         -1);
+        }
+    }
+
+    @Test
+    public void minMaxTest(){
+        int[][] parameters = new int[][] {
+                {Integer.MAX_VALUE, 1},
+                {1, Integer.MAX_VALUE},
+                {Integer.MIN_VALUE, 2},
+                {2, Integer.MIN_VALUE},
+        };
+        
+        int[] functionParameters = new int[]{parameters.length};
+        lruCachePUT.run(LruCacheMethod.Constructor,
+                functionParameters,
+                null);
+
+        for (int[] parameter : parameters) {
+        lruCachePUT.run(LruCacheMethod.Put,
+                parameter,
+                null);
+        }
+
+        for (int[] parameter : parameters) {
+        lruCachePUT.run(LruCacheMethod.Get,
+                new int[] {parameter[0]},
+                parameter[1]);
         }
     }
 }
