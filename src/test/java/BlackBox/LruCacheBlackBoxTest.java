@@ -94,7 +94,7 @@ public class LruCacheBlackBoxTest extends LruCacheSetup {
     }
 
     @Test
-    public void longReplaceTest(){
+    public void longInsertTest(){
         //constructor size = 2
         int[] functionParameters = new int[]{1};
         lruCachePUT.run(LruCacheMethod.Constructor,
@@ -103,14 +103,18 @@ public class LruCacheBlackBoxTest extends LruCacheSetup {
 
         int length = 10000;
         for (int i = 0; i < length; i++) {
-                int[] put = new int[]{0,i};
+                int[] put = new int[]{i,1};
                 lruCachePUT.run(LruCacheMethod.Put,
                         put,
                         null);
-                int[] get = new int[]{0};
+                int[] get = new int[]{i};
                 lruCachePUT.run(LruCacheMethod.Get,
                         get,
-                        i);
+                        1);
+                int[] getPrev = new int[]{i-1};
+                lruCachePUT.run(LruCacheMethod.Get,
+                        getPrev,
+                        -1);
         }
     }
 }
