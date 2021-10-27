@@ -57,6 +57,20 @@ public class BinaryTreeSerializerTest {
     }
 
     @Test
+    public void singleLineofChildrenTest() {
+        BinaryTreeSerializer bs = new BinaryTreeSerializerImpl();
+        TreeNode root = new TreeNode(0);
+        root.left = new TreeNode(1);
+        root.left.left = new TreeNode(3);
+        root.right = new TreeNode(2);
+        root.right.right = new TreeNode(4);
+        root.right.right.right = new TreeNode(5);
+        String s = "[0,1,2,3,null,null,4,null,null,null,5,null,null,null]";
+        TreeNode rootret = bs.deserialize(s);
+        assertEquals(root, rootret);
+    }
+
+    @Test
     public void shortDeserializeTest() {
         BinaryTreeSerializer bs = new BinaryTreeSerializerImpl();
         String s = "";
